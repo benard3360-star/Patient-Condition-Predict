@@ -1,0 +1,1 @@
+This project is meant to predict the CO2EMISSIONS in the Environment. To run the code, first run the Fuel_Notebook.jpynb, then create a templatets folder and save the fuel.html, after that generate the New_Flask.py file and run the codes, this will take you to a localhost server where the model is deployed for predictions.
