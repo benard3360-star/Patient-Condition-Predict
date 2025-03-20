@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CO2 Emission Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #6dd5ed, #2193b0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 5px 0;
+        }
+
+        .input-group input {
+            width: 80px;
+            text-align: center;
+            font-size: 16px;
+            padding: 5px;
+            margin: 0 5px;
+            border: 2px solid #2193b0;
+            border-radius: 5px;
+        }
+
+        .input-group button {
+            background-color: #2193b0;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        h2 {
+            color: #d9534f;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CO2 Emission Prediction</h1>
+        <form action="/predict" method="post">
+            <label for="engine_size">Engine Size</label>
+            <div class="input-group">
+                <button type="button" onclick="adjustValue('engine_size', -0.1)">-</button>
+                <input type="text" id="engine_size" name="engine_size" required value="1.0">
+                <button type="button" onclick="adjustValue('engine_size', 0.1)">+</button>
+            </div>
+
+            <label for="cylinders">Cylinders</label>
+            <div class="input-group">
+                <button type="button" onclick="adjustValue('cylinders', -1)">-</button>
+                <input type="text" id="cylinders" name="cylinders" required value="4">
+                <button type="button" onclick="adjustValue('cylinders', 1)">+</button>
+            </div>
+
+            <label for="fuel_consumption">Fuel Consumption</label>
+            <div class="input-group">
+                <button type="button" onclick="adjustValue('fuel_consumption', -0.5)">-</button>
+                <input type="text" id="fuel_consumption" name="fuel_consumption" required value="10.0">
+                <button type="button" onclick="adjustValue('fuel_consumption', 0.5)">+</button>
+            </div>
+
+            <button type="submit">Predict CO2 Emissions</button>
+        </form>
+
+        {% if prediction is not none %}
+            <h2>{{ prediction }}</h2>
+        {% endif %}
+    </div>
+
+    <script>
+        function adjustValue(id, amount) {
+            let input = document.getElementById(id);
+            let currentValue = parseFloat(input.value) || 0;
+            input.value = (currentValue + amount).toFixed(1);
+        }
+    </script>
+</body>
+</html>
